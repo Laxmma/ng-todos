@@ -1,1 +1,48 @@
-/* You can add global styles to this file, and also import other style files */
+body {
+    font-family: -apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #292b2c;
+    background-color: #fff;
+}
+
+@media (min-width: 1200px) {
+    .container {
+        max-width: 768px;
+        padding: 0px;
+    }
+}
+
+header {
+    background: #fff;
+}
+
+header .container{
+    padding-bottom: 20px;
+    padding-top: 20px;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+header h3 {
+    color: #e47676;
+}
+
+main.container{
+    padding-top: 100px;
+    padding-bottom: 20px;
+}
+
+footer {
+    background: #fff;
+}
+
+footer .container{
+    padding-top: 15px;
+    color: #e47676;
+    border-top: 1px solid #e5e5e5;
+}
+
+
+
+
