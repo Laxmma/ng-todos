@@ -9,7 +9,6 @@ ng:
 ===
 ng generate module app-routing
 ng generate component app-routing/page-not-found --module=app-routing/app-routing.module
-ng generate component app-routing/home-page --module=app-routing/app-routing.module
 ng generate module todo
 ng generate component todo/todo-list --module=todo/todo.module
 ng generate component todo/add-edit-todo --module=todo/todo.module
