@@ -1,0 +1,25 @@
+npm:
+====
+npm install
+npm install --save bootstrap 
+npm install --save @ng-bootstrap/ng-bootstrap
+
+
+ng:
+===
+ng generate module app-routing
+ng generate component app-routing/page-not-found --module=app-routing/app-routing.module
+ng generate component app-routing/home-page --module=app-routing/app-routing.module
+ng generate module todo
+ng generate component todo/todo-list --module=todo/todo.module
+ng generate component todo/add-edit-todo --module=todo/todo.module
+ng generate service todo/todo-service --module=todo/todo.module
+ng generate module shared
+ng generate service shared/emit-message --module=shared/shared.module
+ng generate component todo/add-edit-todo-reactive --module=todo/todo.module
+
+
+json-server:
+============
+json-server --delay 500 --watch db.json
+https://secure-reef-71882.herokuapp.com/todos
