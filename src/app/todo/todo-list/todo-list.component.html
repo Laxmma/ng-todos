@@ -1,3 +1,10 @@
-<p>
-  Todo List Page.
-</p>
+<ul class="list-group list-group-flush todo-list">
+  <li class="list-group-item" *ngFor="let todo of todos">
+      <span class="align-left" [ngClass]="{'compleated': todo.isCompleted}">{{ todo.title }}</span>
+      <span class="badge badge-primary badge-pill">{{ todo.tags }}</span>
+      <span class="badge badge-primary badge-pill">{{ todo.category }}</span>
+      <span class="badge badge-primary badge-pill">{{ todo.targetDate }}</span>
+      <span><a> <i class="icon-pencil"></i></a></span>
+      <span class="badge badge-danger badge-pill"><a><i class="icon-pencil"></i></a></span>
+  </li>
+</ul>
