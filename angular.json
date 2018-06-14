@@ -24,6 +24,7 @@
             ],
             "styles": [
               "node_modules/bootstrap/dist/css/bootstrap.css",
+              "src/assets/font-awesome/css/font-awesome.css",
               "src/styles.css"
             ],
             "scripts": []
