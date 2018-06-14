@@ -21,4 +21,15 @@ ng generate component todo/add-edit-todo-reactive --module=todo/todo.module
 json-server:
 ============
 json-server --delay 500 --watch db.json
-https://secure-reef-71882.herokuapp.com/todos
+
+REST URL's:
+===========
+localhost:3000/todos - GET - Read all records
+
+localhost:3000/todos/1 - GET - Read specific record
+
+localhost:3000/todos/1 - DELETE - Delete record
+
+localhost:3000/todos/1 - PUT  - update record
+
+localhost:3000/todos - POST - create record
