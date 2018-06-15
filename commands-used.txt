@@ -12,7 +12,7 @@ ng generate component app-routing/page-not-found --module=app-routing/app-routin
 ng generate module todo
 ng generate component todo/todo-list --module=todo/todo.module
 ng generate component todo/add-edit-todo --module=todo/todo.module
-ng generate service todo/todo-service --module=todo/todo.module
+ng generate service todo/todo --module=todo/todo.module
 ng generate module shared
 ng generate service shared/emit-message --module=shared/shared.module
 ng generate component todo/add-edit-todo-reactive --module=todo/todo.module
