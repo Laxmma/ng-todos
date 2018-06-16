@@ -5,6 +5,8 @@ import { Observable } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
 
+import { ITodo } from '../shared/interfaces';
+
 @Injectable()
 export class TodoService {
 
