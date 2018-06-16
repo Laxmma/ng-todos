@@ -6,11 +6,32 @@ import { map, catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
 
 import { ITodo } from '../shared/interfaces';
+import { environment } from '../../environments/environment';
 
 @Injectable()
 export class TodoService {
 
-  constructor(http: HttpClient) { }
+  constructor(private http: HttpClient) { }
+
+  apiBaseUrl: string = environment.apiBaseUrl;
+
+  getTodos(): Observable<ITodo[]> {
+    return this.http.get<ITodo[]>(`${this.apiBaseUrl}/todos`, {observe: 'response'})
+                .pipe(map((res) => {
+                  let todos = res.body as ITodo[];
+                  return todos;
+                }))
+                .pipe(catchError(this.handleError));
+  }
+
+  private handleError(error: HttpErrorResponse) {
+    console.error('server error:', error); 
+    if (error.error instanceof Error) {
+      let errMessage = error.error.message;
+      return Observable.throw(errMessage);
+    }
+    return Observable.throw(error || 'Server error');
+  }
 
   
 }
