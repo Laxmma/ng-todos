@@ -4,7 +4,7 @@
       <span class="badge badge-primary badge-pill">{{ todo.tags }}</span>
       <span class="badge badge-primary badge-pill">{{ todo.category }}</span>
       <span class="badge badge-primary badge-pill">{{ todo.targetDate }}</span>
-      <span><a> <i class="icon-pencil"></i></a></span>
-      <span class="badge badge-danger badge-pill"><a><i class="icon-pencil"></i></a></span>
+      <span><a [routerLink]="['/todo', todo.id]"> <i class="icon-pencil"></i></a></span>
+      <span class="badge badge-danger badge-pill"><a [routerLink]="['/todo', todo.id]"><i class="icon-pencil"></i></a></span>
   </li>
 </ul>
