@@ -24,6 +24,15 @@ export class TodoService {
                 .pipe(catchError(this.handleError));
   }
 
+  getTodo(id: number): Observable<ITodo> {
+    return this.http.get<ITodo>(`${this.apiBaseUrl}/todos/${id}`, {observe: 'response'})
+                .pipe(map((res) => {
+                  let todo = res.body as ITodo;
+                  return todo;
+                }))
+                .pipe(catchError(this.handleError));
+  }
+
   private handleError(error: HttpErrorResponse) {
     console.error('server error:', error); 
     if (error.error instanceof Error) {
