@@ -8,7 +8,8 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { TodoListComponent } from '../todo/todo-list/todo-list.component';
 
 const appRoutes: Routes = [
-  { path: '', component: TodoListComponent },
+  { path: 'todo-list', component: TodoListComponent },
+  { path: '', redirectTo: 'todo-list', pathMatch: 'full' },
   { path: '**', component: PageNotFoundComponent }
 ];
 
