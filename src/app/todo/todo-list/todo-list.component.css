@@ -12,6 +12,10 @@
 .todo-list .list-group-item a {
     text-decoration: none;
     padding-left: 10px;
+    cursor: pointer;
+}
+.todo-list .list-group-item .badge-pill {
+    margin-left: 5px;
 }
 .todo-list .list-group-item .badge-danger a {
     color: #ffffff;
