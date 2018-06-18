@@ -1,0 +1,12 @@
+<form (ngSubmit)="submit()" #todoForm="ngForm" class="editForm" novalidate>
+
+  <div class="form-group row">
+    <label class="col-sm-2 col-form-label">Title</label>
+    <div class="col-sm-10">
+      <div>{{ todo.title }}</div>
+      <input type="text" class="form-control" placeholder="Title" name="title" [(ngModel)]="todo.title" #title="ngModel" maxlength='64' required/>
+      <div class="alert alert-danger" [hidden]="title.untouched || title.valid">Title is required</div>
+    </div>
+  </div>
+
+</form>

@@ -9,7 +9,7 @@ import { ITodo } from '../../shared/interfaces';
   styleUrls: ['./add-edit-todo.component.css']
 })
 export class AddEditTodoComponent implements OnInit {
-  
+
   todo: ITodo = {
     'id': 0,
     'title': '',
@@ -36,6 +36,10 @@ export class AddEditTodoComponent implements OnInit {
           // this.updateTagsOnLoad();
           // this.updateDate(this.todo.targetDate);
         });
+  }
+
+  submit() {
+    
   }
 
 }
