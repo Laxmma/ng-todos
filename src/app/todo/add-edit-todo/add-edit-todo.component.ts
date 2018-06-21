@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { TodoService } from '../todo.service';
-import { ITodo } from '../../shared/interfaces';
+import { ITodo, ITag } from '../../shared/interfaces';
 
 @Component({
   selector: 'app-add-edit-todo',
@@ -19,6 +19,13 @@ export class AddEditTodoComponent implements OnInit {
     'category': ''
   };
 
+  tags: Array<ITag> = [
+    {label: "Important", checked: false},
+    {label: "Urgent", checked: false}
+  ];
+
+  categories: ReadonlyArray<string> = ['Home', 'Work', 'Personal', 'Social','Bill Payments', 'Other'];
+
   constructor(private router: Router,
               private route: ActivatedRoute,
               private todoService: TodoService) { }
@@ -33,9 +40,17 @@ export class AddEditTodoComponent implements OnInit {
         .subscribe((response: ITodo) => {
           this.todo = response;
           console.log(this.todo);
-          // this.updateTagsOnLoad();
+          this.updateTagsOnLoad();
           // this.updateDate(this.todo.targetDate);
         });
+  }
+
+  updateTagsOnLoad() {
+    let tags: string[] = this.todo.tags.split(','); //['Urgent']
+    for (const tagLabel of tags) {
+      var tagIndex = this.tags.findIndex(tag => tag.label == tagLabel.trim());
+      this.tags[tagIndex].checked = true;
+    }
   }
 
   submit() {

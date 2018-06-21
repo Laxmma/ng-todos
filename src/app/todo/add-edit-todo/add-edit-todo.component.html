@@ -3,10 +3,48 @@
   <div class="form-group row">
     <label class="col-sm-2 col-form-label">Title</label>
     <div class="col-sm-10">
-      <div>{{ todo.title }}</div>
       <input type="text" class="form-control" placeholder="Title" name="title" [(ngModel)]="todo.title" #title="ngModel" maxlength='64' required/>
       <div class="alert alert-danger" [hidden]="title.untouched || title.valid">Title is required</div>
     </div>
   </div>
+
+  <fieldset class="form-group">
+    <div class="row">
+      <legend class="col-form-label col-sm-2 pt-0">Is completed</legend>
+      <div class="col-sm-10">
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="isCompleted" [value]="true" [(ngModel)]="todo.isCompleted" #isCompleted="ngModel" required>
+          <label class="form-check-label">Yes</label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="isCompleted" [value]="false" [(ngModel)]="todo.isCompleted" #isCompleted="ngModel" required>
+          <label class="form-check-label">No</label>
+        </div>
+      </div>
+    </div>
+  </fieldset>
+
+  <div class="form-group row">
+    <div class="col-sm-2">Tags</div>
+    <div class="col-sm-10">
+      <div class="form-check" *ngFor="let tag of tags">
+        <input class="form-check-input" type="checkbox" name="tags" [value]="tag.checked"  [checked]="tag.checked" (change)="updateTagOnChange(tag, $event)">
+        <label class="form-check-label">{{ tag.label }}</label>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <label class="col-sm-2 col-form-label">Category</label>
+    <div class="col-sm-10">
+      <select class="form-control" name="category" [(ngModel)]="todo.category" #category="ngModel" required>
+        <option selected value="">Select Category</option>
+        <option *ngFor="let category of categories" [ngValue]="category">{{ category }}</option>
+      </select>
+      <div class="alert alert-danger" [hidden]="category.untouched || category.valid">Please select a category</div>
+    </div>
+  </div>
+
+  
 
 </form>
