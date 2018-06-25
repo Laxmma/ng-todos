@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { TodoService } from '../todo.service';
 import { ITodo, ITag } from '../../shared/interfaces';
+import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-add-edit-todo',
@@ -26,6 +27,10 @@ export class AddEditTodoComponent implements OnInit {
 
   categories: ReadonlyArray<string> = ['Home', 'Work', 'Personal', 'Social','Bill Payments', 'Other'];
 
+  now = new Date();
+
+  targetDate: NgbDateStruct =  {year: this.now.getFullYear(), month: this.now.getMonth()+1, day: this.now.getDate()};
+
   constructor(private router: Router,
               private route: ActivatedRoute,
               private todoService: TodoService) { }
@@ -41,7 +46,7 @@ export class AddEditTodoComponent implements OnInit {
           this.todo = response;
           console.log(this.todo);
           this.updateTagsOnLoad();
-          // this.updateDate(this.todo.targetDate);
+          this.updateDate(this.todo.targetDate);
         });
   }
 
@@ -52,6 +57,13 @@ export class AddEditTodoComponent implements OnInit {
       this.tags[tagIndex].checked = true;
     }
   }
+
+  updateDate(dateStr) {
+    let date = new Date(dateStr);
+    this.targetDate =  {year: date.getFullYear(), month: date.getMonth()+1, day: date.getDate()};
+  }
+
+
 
   submit() {
     

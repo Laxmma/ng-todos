@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { AppComponent } from './app.component';
 import { RouterModule } from '@angular/router';
@@ -16,7 +17,8 @@ import { TodoModule } from './todo/todo.module';
     RouterModule,
     TodoModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    NgbModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]
