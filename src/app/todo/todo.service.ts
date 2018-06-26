@@ -17,20 +17,32 @@ export class TodoService {
 
   getTodos(): Observable<ITodo[]> {
     return this.http.get<ITodo[]>(`${this.apiBaseUrl}/todos`, {observe: 'response'})
-                .pipe(map((res) => {
+                .pipe(
+                  map((res) => {
                   let todos = res.body as ITodo[];
                   return todos;
-                }))
-                .pipe(catchError(this.handleError));
+                }),
+                catchError(this.handleError));
   }
 
   getTodo(id: number): Observable<ITodo> {
     return this.http.get<ITodo>(`${this.apiBaseUrl}/todos/${id}`, {observe: 'response'})
-                .pipe(map((res) => {
-                  let todo = res.body as ITodo;
-                  return todo;
-                }))
-                .pipe(catchError(this.handleError));
+                .pipe(
+                  map((res) => {
+                    let todo = res.body as ITodo;
+                    return todo;
+                  }),
+                  catchError(this.handleError));
+  }
+
+  updateTodo(todo: ITodo): Observable<ITodo> {
+    return this.http.put<ITodo>(`${this.apiBaseUrl}/todos/${todo.id}`, todo)
+                .pipe(
+                  map((res) => {
+                    let todo = res as ITodo;
+                    return todo;
+                  }),
+                  catchError(this.handleError));
   }
 
   private handleError(error: HttpErrorResponse) {

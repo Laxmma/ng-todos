@@ -2,11 +2,11 @@
   "todos": [
     {
       "id": 1,
-      "title": "Pay power bill",
-      "isCompleted": false,
-      "targetDate": "2018-5-5",
-      "tags": "Important,Urgent",
-      "category": "Personal"
+      "title": "Pay power billllllll",
+      "isCompleted": true,
+      "targetDate": "2018-5-12",
+      "tags": "Urgent",
+      "category": "Home"
     },
     {
       "id": 2,

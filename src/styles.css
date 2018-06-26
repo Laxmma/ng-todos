@@ -43,6 +43,16 @@ footer .container{
     border-top: 1px solid #e5e5e5;
 }
 
+.align-right {
+    text-align: right;
+}
+.align-right .btn{
+    margin-left: 10px;
+}
+.top-nav .nav-item{
+    margin-left: 10px; 
+}
+
 
 
 

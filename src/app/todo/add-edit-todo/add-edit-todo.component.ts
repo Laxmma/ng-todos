@@ -31,6 +31,8 @@ export class AddEditTodoComponent implements OnInit {
 
   targetDate: NgbDateStruct =  {year: this.now.getFullYear(), month: this.now.getMonth()+1, day: this.now.getDate()};
 
+  errorMessage:string = '';
+
   constructor(private router: Router,
               private route: ActivatedRoute,
               private todoService: TodoService) { }
@@ -51,7 +53,7 @@ export class AddEditTodoComponent implements OnInit {
   }
 
   updateTagsOnLoad() {
-    let tags: string[] = this.todo.tags.split(','); //['Urgent']
+    let tags: string[] = this.todo.tags.split(',');
     for (const tagLabel of tags) {
       var tagIndex = this.tags.findIndex(tag => tag.label == tagLabel.trim());
       this.tags[tagIndex].checked = true;
@@ -63,10 +65,49 @@ export class AddEditTodoComponent implements OnInit {
     this.targetDate =  {year: date.getFullYear(), month: date.getMonth()+1, day: date.getDate()};
   }
 
+  updateTagOnChange(tagChanged, event) {
+    var tagIndex = this.tags.findIndex(tag => tag.label == tagChanged.label);
+    this.tags[tagIndex].checked = event.target.checked;
+  }
 
 
   submit() {
-    
+    // Preparing final payload start
+    this.todo.tags = '';
+    for(let tag of this.tags) {
+      if(tag.checked) {
+        if(this.todo.tags) {
+          this.todo.tags += `,${tag.label}`;
+        } else {
+          this.todo.tags += `${tag.label}`;
+        }
+      }  
+    }
+
+    this.todo.targetDate = `${this.targetDate.year}-${this.targetDate.month}-${this.targetDate.day}`;
+    // Preparing final payload end
+
+    console.log(this.todo);
+    if(this.todo.id) {
+      this.todoService.updateTodo(this.todo)
+          .subscribe((todo: ITodo) => {
+            if(todo) {
+              this.router.navigate(['todo-list']);
+            } else {
+              this.errorMessage = 'Failed to update Todo';
+            }
+          },
+          (err: any) => {
+            this.errorMessage = 'Failed to update Todo';
+          });
+    } else {
+      // Adding new todo
+    }
+  }
+
+  cancle(event) {
+    event.preventDefault();
+    this.router.navigate(['todo-list']);
   }
 
 }
