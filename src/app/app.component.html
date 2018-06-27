@@ -11,8 +11,11 @@
                     <div class="col-lg-6 top-nav">
                         <nav>
                             <ul class="nav nav-pills float-right">
-                                <li class="nav-item">
-                                    <a class="nav-link active">Add Todo</a>
+                                <li class="nav-item" [hidden]='isAddEditTodo'>
+                                    <a class="nav-link active" [routerLink]="['/todo/0']">Add Todo </a>
+                                </li>
+                                <li class="nav-item" [hidden]='!isAddEditTodo'>
+                                    <a class="nav-link active" [routerLink]="['/todo-list']"><i class="icon-chevron-left"></i> Back</a>
                                 </li>
                             </ul>
                         </nav>
