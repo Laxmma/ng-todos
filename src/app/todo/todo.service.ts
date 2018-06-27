@@ -45,6 +45,16 @@ export class TodoService {
                   catchError(this.handleError));
   }
 
+  insertTodo(todo: ITodo): Observable<ITodo> {
+    return this.http.post<ITodo>(`${this.apiBaseUrl}/todos`, todo)
+                    .pipe(
+                      map((res) => {
+                        let todo = res as ITodo;
+                        return todo;
+                      }),
+                      catchError(this.handleError));
+  }
+
   private handleError(error: HttpErrorResponse) {
     console.error('server error:', error); 
     if (error.error instanceof Error) {

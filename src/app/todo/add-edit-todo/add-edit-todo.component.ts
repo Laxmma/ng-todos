@@ -33,13 +33,19 @@ export class AddEditTodoComponent implements OnInit {
 
   errorMessage:string = '';
 
+  operationText: string = 'Save';
+
   constructor(private router: Router,
               private route: ActivatedRoute,
               private todoService: TodoService) { }
 
   ngOnInit() {
     let id = this.route.snapshot.params['id'];
-    this.getTodo(id);
+    if(id !== '0') {
+      this.getTodo(id);
+      this.operationText = 'Update';
+    }
+    
   }
 
   getTodo(id: number) {
@@ -87,7 +93,6 @@ export class AddEditTodoComponent implements OnInit {
     this.todo.targetDate = `${this.targetDate.year}-${this.targetDate.month}-${this.targetDate.day}`;
     // Preparing final payload end
 
-    console.log(this.todo);
     if(this.todo.id) {
       this.todoService.updateTodo(this.todo)
           .subscribe((todo: ITodo) => {
@@ -101,7 +106,17 @@ export class AddEditTodoComponent implements OnInit {
             this.errorMessage = 'Failed to update Todo';
           });
     } else {
-      // Adding new todo
+      this.todoService.insertTodo(this.todo)
+          .subscribe((todo: ITodo) => {
+            if(todo) {
+              this.router.navigate(['todo-list']);
+            } else {
+              this.errorMessage = 'Failed to save Todo';
+            }
+          },
+          (err: any) => {
+            this.errorMessage = 'Failed to save Todo';
+          });
     }
   }
 

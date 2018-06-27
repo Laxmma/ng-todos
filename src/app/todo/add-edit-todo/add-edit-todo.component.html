@@ -64,7 +64,7 @@
     </div>
     <div class="col-sm-10 align-right">
       <button class="btn btn-default" (click)='cancle($event)'>cancel</button>
-      <button type="submit" class="btn btn-success" [disabled]="!todoForm.valid">Update</button>
+      <button type="submit" class="btn btn-success" [disabled]="!todoForm.valid">{{ operationText }}</button>
     </div>
   </div>
 
