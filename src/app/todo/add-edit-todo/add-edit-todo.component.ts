@@ -3,7 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { TodoService } from '../todo.service';
 import { ITodo, ITag } from '../../shared/interfaces';
 import { EmitMessageService } from '../../shared/emit-message.service';
-import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
+import { NgbDateStruct, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-add-edit-todo',
@@ -35,10 +35,12 @@ export class AddEditTodoComponent implements OnInit {
   errorMessage:string = '';
 
   operationText: string = 'Save';
+  modalReference: any;
 
   constructor(private router: Router,
               private route: ActivatedRoute,
               private todoService: TodoService,
+              private modalService: NgbModal,
               private messageEmitter: EmitMessageService) { }
 
   ngOnInit() {
@@ -126,6 +128,30 @@ export class AddEditTodoComponent implements OnInit {
   cancle(event) {
     event.preventDefault();
     this.router.navigate(['todo-list']);
+  }
+
+  confirmDelete(event, content) {
+    event.preventDefault();
+    this.modalReference = this.modalService.open(content);
+    this.modalReference.result.then((result) => {
+      console.log('Modal closed');
+    }, (reason) => {
+      console.log('Modal dismissed');
+    })
+  }
+
+  performDelete(id) {
+    this.modalReference.close();
+    this.todoService.deleteTodo(id).subscribe((deleted: boolean) => {
+      if(deleted) {
+        this.messageEmitter.sendMessage('Todo deleted successfully');
+        this.router.navigate(['todo-list']);
+      } else {
+        this.errorMessage = 'Failed to delete Todo';
+      }
+    }, (err: any) => {
+      this.errorMessage = 'Failed to delete todo';
+    });
   }
 
 }

@@ -55,6 +55,15 @@ export class TodoService {
                       catchError(this.handleError));
   }
 
+  deleteTodo(id: number): Observable<boolean> {
+    return this.http.delete<boolean>(`${this.apiBaseUrl}/todos/${id}`)
+              .pipe(
+                map((res) => {
+                  return res ? true : false;
+                }),
+                catchError(this.handleError));
+  }
+
   private handleError(error: HttpErrorResponse) {
     console.error('server error:', error); 
     if (error.error instanceof Error) {

@@ -55,14 +55,6 @@
       "tags": "Important",
       "isCompleted": true,
       "targetDate": "2018-4-8"
-    },
-    {
-      "id": 8,
-      "title": "new test todo",
-      "isCompleted": true,
-      "targetDate": "2018-6-27",
-      "tags": "Important",
-      "category": "Personal"
     }
   ]
 }
