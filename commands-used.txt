@@ -33,3 +33,5 @@ localhost:3000/todos/1 - DELETE - Delete record
 localhost:3000/todos/1 - PUT  - update record
 
 localhost:3000/todos - POST - create record
+
+CRUD - Create Read Update Delete

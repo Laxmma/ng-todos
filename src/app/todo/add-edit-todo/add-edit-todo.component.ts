@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { TodoService } from '../todo.service';
 import { ITodo, ITag } from '../../shared/interfaces';
+import { EmitMessageService } from '../../shared/emit-message.service';
 import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
@@ -37,7 +38,8 @@ export class AddEditTodoComponent implements OnInit {
 
   constructor(private router: Router,
               private route: ActivatedRoute,
-              private todoService: TodoService) { }
+              private todoService: TodoService,
+              private messageEmitter: EmitMessageService) { }
 
   ngOnInit() {
     let id = this.route.snapshot.params['id'];
@@ -52,7 +54,6 @@ export class AddEditTodoComponent implements OnInit {
     this.todoService.getTodo(id)
         .subscribe((response: ITodo) => {
           this.todo = response;
-          console.log(this.todo);
           this.updateTagsOnLoad();
           this.updateDate(this.todo.targetDate);
         });
@@ -97,6 +98,7 @@ export class AddEditTodoComponent implements OnInit {
       this.todoService.updateTodo(this.todo)
           .subscribe((todo: ITodo) => {
             if(todo) {
+              this.messageEmitter.sendMessage('Todo updated successfully');
               this.router.navigate(['todo-list']);
             } else {
               this.errorMessage = 'Failed to update Todo';
@@ -109,6 +111,7 @@ export class AddEditTodoComponent implements OnInit {
       this.todoService.insertTodo(this.todo)
           .subscribe((todo: ITodo) => {
             if(todo) {
+              this.messageEmitter.sendMessage('Todo saved successfully');
               this.router.navigate(['todo-list']);
             } else {
               this.errorMessage = 'Failed to save Todo';
